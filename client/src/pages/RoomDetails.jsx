@@ -199,7 +199,7 @@ function RoomDetails() {
               <p className="text-lg md:text-xl">Hosted by {room.hotel.name}</p>
               <div className="flex items-center mt-1">
                 <StarRating />
-                <p className=",l-2">200 ratings</p>
+                <p className="ml-2">200 ratings</p>
               </div>
             </div>
           </div>
