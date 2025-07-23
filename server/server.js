@@ -4,6 +4,7 @@ import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 
 import connectDB from "./configs/db.js";
+import clerkWebhooks from "./controllers/clerkWebhooks.js";
 connectDB();
 
 const app = express();
@@ -14,6 +15,9 @@ app.use(cors());
 // Middleware
 app.use(clerkMiddleware());
 app.use(express.json());
+
+// API to listen Clerk Webhook
+app.use("/api/clerk", clerkWebhooks);
 
 app.get("/", (req, res) => {
   res.send("API is working");
