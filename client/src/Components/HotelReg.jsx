@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
+import { useAppContext } from "../Context/AppContext";
 
 function HotelReg() {
+  const { setShowHotelReg } = useAppContext();
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [city, setCity] = useState("");
+
+  function onSubmitHandler() {}
+
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70">
-      <form className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
+      <form
+        onSubmit={onSubmitHandler}
+        onClick={() => e.stopPropagation()}
+        className="flex bg-white rounded-xl max-w-4xl max-md:mx-2"
+      >
         <img
           src={assets.regImage}
           alt="reg-image"
@@ -16,6 +30,7 @@ function HotelReg() {
             src={assets.closeIcon}
             alt="close-icon"
             className="absolute top-4 right-4 h-4 w-4 cursor-pointer"
+            onClick={() => setShowHotelReg(false)}
           />
           <p className="text-2xl font-semibold mt-6">Register Your Hotel</p>
 
@@ -26,6 +41,8 @@ function HotelReg() {
             </label>
             <input
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
@@ -40,6 +57,8 @@ function HotelReg() {
             </label>
             <input
               id="contact"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
               type="text"
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
@@ -54,6 +73,8 @@ function HotelReg() {
             </label>
             <input
               id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               type="text"
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
@@ -68,6 +89,8 @@ function HotelReg() {
             </label>
             <select
               id="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
               required
             >
