@@ -2,9 +2,9 @@
 export const getUserData = async (req, res) => {
   try {
     const { role, recentSearchedCities } = req.user;
-    res.json({ Success: true, role, recentSearchedCities });
+    res.json({ success: true, role, recentSearchedCities });
   } catch (error) {
-    res.json({ Success: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -21,8 +21,8 @@ export const storeRecentSearchedCities = async (req, res) => {
     }
 
     await user.save();
-    res.json({ Success: false, message: "City Added" });
+    res.json({ success: false, message: "City Added" });
   } catch (error) {
-    res.json({ Success: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };

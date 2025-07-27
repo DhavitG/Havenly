@@ -20,9 +20,12 @@ export const AppProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const data = await axios.get("/api/user", {
+      const res = await axios.get("/api/user", {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
+
+      const data = res.data;
+      console.log("👤 API /api/user response:", data);
 
       if (data.success) {
         setIsOwner(data.role === "hotelOwner");
@@ -34,6 +37,7 @@ export const AppProvider = ({ children }) => {
         }, 5000);
       }
     } catch (error) {
+      console.error("❌ fetchUser error:", error.message);
       toast.error(error.message);
     }
   };
@@ -56,6 +60,7 @@ export const AppProvider = ({ children }) => {
     setShowHotelReg,
     searchedCities,
     setSearchedCities,
+    fetchUser,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

@@ -1,22 +1,48 @@
 import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../Context/AppContext";
+import toast from "react-hot-toast";
 
 function HotelReg() {
-  const { setShowHotelReg } = useAppContext();
+  const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [city, setCity] = useState("");
 
-  function onSubmitHandler() {}
+  async function onSubmitHandler(e) {
+    try {
+      e.preventDefault();
+
+      const { data } = await axios.post(
+        `/api/hotels/`,
+        { name, contact, address, city },
+        { headers: { Authorization: `Bearer ${await getToken()}` } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        await fetchUser();
+        setShowHotelReg(false);
+        console.log("haha");
+      } else {
+        console.log("hehe");
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70">
+    <div
+      onClick={() => setShowHotelReg(false)}
+      className="fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70"
+    >
       <form
         onSubmit={onSubmitHandler}
-        onClick={() => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         className="flex bg-white rounded-xl max-w-4xl max-md:mx-2"
       >
         <img
