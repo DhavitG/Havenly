@@ -16,8 +16,24 @@ connectCloudinary();
 
 const app = express();
 
-// Enable cross origin resource sharing (allow any frontend to get connected with this backend )
-app.use(cors());
+// Enable cross origin resource sharing (allow any frontend to get connected with this backend)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://dhavit-havenly.vercel.app", // replace with actual deployed URL
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 // Middleware
 app.use(clerkMiddleware());
