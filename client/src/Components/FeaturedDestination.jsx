@@ -7,7 +7,6 @@ import { useAppContext } from "../Context/AppContext";
 
 function FeaturedDestination() {
   const { rooms, navigate } = useAppContext();
-  console.log("rooms:", rooms);
   return (
     rooms.length > 0 && (
       <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 py-20">
