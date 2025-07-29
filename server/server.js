@@ -17,13 +17,7 @@ connectCloudinary();
 const app = express();
 
 // Enable cross origin resource sharing (allow any frontend to get connected with this backend)
-app.use(
-  cors({
-    origin: "*", // ✅ Allow all origins
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 // Middleware
 app.use(clerkMiddleware());
