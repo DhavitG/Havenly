@@ -19,7 +19,7 @@ const app = express();
 // Enable cross origin resource sharing (allow any frontend to get connected with this backend)
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://dhavit-havenly.vercel.app", // replace with actual deployed URL
+  "https://dhavit-havenly-frontend.vercel.app", // replace with actual deployed URL
 ];
 
 app.use(
